@@ -1,0 +1,80 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26403.7
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{8C3AFF0D-4D67-4F0E-B8AD-D2F3A06CD024}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ViewModels", "ViewModels", "{EEF2058A-036A-49F1-9756-F866820C0C21}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Levolution.Reversi.Records.Shared", "Levolution.Reversi.Records.Shared\Levolution.Reversi.Records.Shared.shproj", "{9D8CD5E3-D969-4B58-BC38-6BE4A1FD585C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Levolution.Reversi.Records", "Levolution.Reversi.Records\Levolution.Reversi.Records.csproj", "{DEAA9167-39F7-49D4-9942-4A3526FEE138}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Levolution.Reversi.Records.Unity", "Levolution.Reversi.Records.Unity\Levolution.Reversi.Records.Unity.csproj", "{23DEF601-1E71-4EF6-A5E0-24E9B078634C}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Levolution.Reversi.Shared", "Levolution.Reversi.Shared\Levolution.Reversi.Shared.shproj", "{E408ED8D-BBC3-4535-AE0E-8EFD5711C240}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Levolution.Reversi", "Levolution.Reversi\Levolution.Reversi.csproj", "{80AC7394-BE6A-47BB-B28B-DEDCB441493C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Levolution.Reversi.Unity", "Levolution.Reversi.Unity\Levolution.Reversi.Unity.csproj", "{78E1B33F-7036-4270-9A57-3E0C300FDFF6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Games", "Games", "{4A334931-8A4D-4FF2-A3A0-F10253472F37}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Levolution.Reversi.Games.Console", "Levolution.Reversi.Games.Console\Levolution.Reversi.Games.Console.csproj", "{7C5465CD-F100-4844-B2E3-02F57949CDE6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Views", "Views", "{C89058BD-7758-46DB-A28B-48F75CFBED57}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Levolution.Reversi.Components.Unity", "Levolution.Reversi.Components.Unity\Levolution.Reversi.Components.Unity.csproj", "{D1743878-1A61-4A24-A2B1-991C95A5CAA3}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Levolution.Reversi.Records.Shared\Levolution.Reversi.Records.Shared.projitems*{23def601-1e71-4ef6-a5e0-24e9b078634c}*SharedItemsImports = 4
+		Levolution.Reversi.Shared\Levolution.Reversi.Shared.projitems*{78e1b33f-7036-4270-9a57-3e0c300fdff6}*SharedItemsImports = 4
+		Levolution.Reversi.Records.Shared\Levolution.Reversi.Records.Shared.projitems*{9d8cd5e3-d969-4b58-bc38-6be4a1fd585c}*SharedItemsImports = 13
+		Levolution.Reversi.Shared\Levolution.Reversi.Shared.projitems*{e408ed8d-bbc3-4535-ae0e-8efd5711c240}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DEAA9167-39F7-49D4-9942-4A3526FEE138}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEAA9167-39F7-49D4-9942-4A3526FEE138}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEAA9167-39F7-49D4-9942-4A3526FEE138}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEAA9167-39F7-49D4-9942-4A3526FEE138}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23DEF601-1E71-4EF6-A5E0-24E9B078634C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23DEF601-1E71-4EF6-A5E0-24E9B078634C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23DEF601-1E71-4EF6-A5E0-24E9B078634C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23DEF601-1E71-4EF6-A5E0-24E9B078634C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80AC7394-BE6A-47BB-B28B-DEDCB441493C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80AC7394-BE6A-47BB-B28B-DEDCB441493C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80AC7394-BE6A-47BB-B28B-DEDCB441493C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80AC7394-BE6A-47BB-B28B-DEDCB441493C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78E1B33F-7036-4270-9A57-3E0C300FDFF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78E1B33F-7036-4270-9A57-3E0C300FDFF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78E1B33F-7036-4270-9A57-3E0C300FDFF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78E1B33F-7036-4270-9A57-3E0C300FDFF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C5465CD-F100-4844-B2E3-02F57949CDE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C5465CD-F100-4844-B2E3-02F57949CDE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C5465CD-F100-4844-B2E3-02F57949CDE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C5465CD-F100-4844-B2E3-02F57949CDE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1743878-1A61-4A24-A2B1-991C95A5CAA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1743878-1A61-4A24-A2B1-991C95A5CAA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1743878-1A61-4A24-A2B1-991C95A5CAA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1743878-1A61-4A24-A2B1-991C95A5CAA3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9D8CD5E3-D969-4B58-BC38-6BE4A1FD585C} = {8C3AFF0D-4D67-4F0E-B8AD-D2F3A06CD024}
+		{DEAA9167-39F7-49D4-9942-4A3526FEE138} = {8C3AFF0D-4D67-4F0E-B8AD-D2F3A06CD024}
+		{23DEF601-1E71-4EF6-A5E0-24E9B078634C} = {8C3AFF0D-4D67-4F0E-B8AD-D2F3A06CD024}
+		{E408ED8D-BBC3-4535-AE0E-8EFD5711C240} = {EEF2058A-036A-49F1-9756-F866820C0C21}
+		{80AC7394-BE6A-47BB-B28B-DEDCB441493C} = {EEF2058A-036A-49F1-9756-F866820C0C21}
+		{78E1B33F-7036-4270-9A57-3E0C300FDFF6} = {EEF2058A-036A-49F1-9756-F866820C0C21}
+		{7C5465CD-F100-4844-B2E3-02F57949CDE6} = {4A334931-8A4D-4FF2-A3A0-F10253472F37}
+		{D1743878-1A61-4A24-A2B1-991C95A5CAA3} = {C89058BD-7758-46DB-A28B-48F75CFBED57}
+	EndGlobalSection
+EndGlobal
