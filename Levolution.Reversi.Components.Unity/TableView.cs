@@ -15,12 +15,11 @@ namespace Levolution.Reversi.Components
 
         #endregion
 
-        public Table Table { get; private set; }
+        public Table Table { get; } = new Table();
 
         void Start()
         {
             var records = CellPosition.ParseList(_records);
-            Table = new Table();
             Table.Reset(records);
 
             foreach (var cell in Table.Cells)

@@ -12,7 +12,10 @@ namespace Levolution.Reversi.Components
         #region SerializeField
 
         [SerializeField]
-        private Animator _animator = null;
+        private Animator _cellAnimator = null;
+
+        [SerializeField]
+        private Animator _diskAnimator = null;
 
         #endregion
 
@@ -43,7 +46,7 @@ namespace Levolution.Reversi.Components
         private void UpdateTableCell()
         {
             var state = TableCell?.State ?? Records.CellState.None;
-            _animator.Play(state.ToString()); // TODO: to Name hash
+            _diskAnimator.Play(state.ToString()); // TODO: to Name hash
 
             name = nameof(TableCellView) + $"({TableCell?.Position.ToString()})";
 
