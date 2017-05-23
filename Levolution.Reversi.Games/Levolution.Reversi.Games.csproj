@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net452</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Levolution.Reversi.Records\Levolution.Reversi.Records.csproj" />
+    <ProjectReference Include="..\Levolution.Reversi\Levolution.Reversi.csproj" />
+  </ItemGroup>
+  <Import Project="..\Levolution.Reversi.Games.Shared\Levolution.Reversi.Games.Shared.projitems" Label="Shared" />
+</Project>

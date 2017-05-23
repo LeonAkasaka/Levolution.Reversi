@@ -35,6 +35,26 @@ namespace Levolution.Reversi.Records
         /// <returns>Formatted position string.</returns>
         public override string ToString() => $"{(char)(Column + 'a')}{Row + 1}";
 
+        public override bool Equals(object obj)
+        {
+            if (obj is CellPosition a) { return this == a; }
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return Row ^ Column;
+        }
+
+        public static bool operator ==(CellPosition a, CellPosition b)
+        {
+            return a.Row == b.Row && a.Column == b.Column;
+        }
+        public static bool operator !=(CellPosition a, CellPosition b)
+        {
+            return !(a == b);
+        }
+
         /// <summary>
         /// Parse from string that is formated at "a1" - "h8".
         /// </summary>

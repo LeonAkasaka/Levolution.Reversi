@@ -45,14 +45,18 @@ namespace Levolution.Reversi.Components
 
         private void UpdateTableCell()
         {
-            var state = TableCell?.State ?? Records.CellState.None;
-            _diskAnimator.Play(state.ToString()); // TODO: to Name hash
+            var diskState = TableCell?.State ?? Records.CellState.None;
+            _diskAnimator.Play(diskState.ToString()); // TODO: to Name hash
 
             name = nameof(TableCellView) + $"({TableCell?.Position.ToString()})";
 
             var x = TableCell?.Position.Column ?? 0;
             var z = TableCell?.Position.Row ?? 0;
             transform.localPosition = new Vector3(x * CellMargin, 0, -(z * CellMargin));
+
+            var cellState = TableCell.IsSelected ? "Selected"
+                : TableCell.IsPlaceable ? "Placeable" : "Unselected";
+            _cellAnimator.Play(cellState);
         }
     }
 

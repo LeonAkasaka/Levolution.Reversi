@@ -1,12 +1,14 @@
 ﻿using Levolution.Reversi.Records;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 
 namespace Levolution.Reversi
 {
     /// <summary>
     /// Reversi table.
     /// </summary>
-    public class Table
+    public class Table : INotifyPropertyChanged
     {
         /// <summary>
         /// Rows.
@@ -27,6 +29,27 @@ namespace Levolution.Reversi
         /// <summary>
         /// 
         /// </summary>
+        public CellPosition SelectedCell
+        {
+            get { return _selectedCell; }
+            set
+            {
+                _selectedCell = value;
+                OnSelectedCellChanged();
+                if (PropertyChanged != null)
+                {
+                    PropertyChanged.Invoke(this, _isSelectedCellPropertyChangedEventArgs);
+                }
+            }
+        }
+        private CellPosition _selectedCell;
+        private PropertyChangedEventArgs _isSelectedCellPropertyChangedEventArgs = new PropertyChangedEventArgs(nameof(SelectedCell));
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public Table()
         {
             for (var r = 0; r < Rows; r++)
@@ -37,6 +60,8 @@ namespace Levolution.Reversi
                     _cells.Add(pos,  new TableCell(pos));
                 }
             }
+
+            SelectedCell= new CellPosition();
         }
 
         /// <summary>
@@ -253,6 +278,18 @@ namespace Levolution.Reversi
             }
 
             return false;
+        }
+ 
+        private void OnSelectedCellChanged()
+        {
+            var oldSelectedCell = Cells.FirstOrDefault(x => x.IsSelected);
+            if (oldSelectedCell != null)
+            {
+                oldSelectedCell.IsSelected = false;
+            }
+
+            var newSelectedCell = Cells.First(x => x.Position == SelectedCell);
+            newSelectedCell.IsSelected = true;
         }
     }
 }

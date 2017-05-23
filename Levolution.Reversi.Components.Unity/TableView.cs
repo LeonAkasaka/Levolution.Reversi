@@ -1,5 +1,7 @@
 ﻿using Levolution.Reversi.Records;
 using UnityEngine;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace Levolution.Reversi.Components
 {
@@ -15,16 +17,22 @@ namespace Levolution.Reversi.Components
 
         #endregion
 
+        /// <summary>
+        /// Data source.
+        /// </summary>
         public Table Table { get; } = new Table();
 
-        void Start()
+        public IEnumerable<TableCellView> CellViews => _cellViews;
+        private List<TableCellView> _cellViews = new List<TableCellView>();
+
+        private void Start()
         {
             var records = CellPosition.ParseList(_records);
             Table.Reset(records);
 
             foreach (var cell in Table.Cells)
             {
-                CreateTableCellView(cell);
+                _cellViews.Add(CreateTableCellView(cell));
             }
         }
 
@@ -36,5 +44,4 @@ namespace Levolution.Reversi.Components
             return cellView;
         }
     }
-
 }

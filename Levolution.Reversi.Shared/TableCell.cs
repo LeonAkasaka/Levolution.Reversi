@@ -29,6 +29,36 @@ namespace Levolution.Reversi
         private PropertyChangedEventArgs _statePropertyChangedEventArgs = new PropertyChangedEventArgs(nameof(State));
 
         /// <summary>
+        /// 
+        /// </summary>
+        public bool IsSelected
+        {
+            get { return _isSelected; }
+            set
+            {
+                _isSelected = value;
+                PropertyChanged?.Invoke(this, _isSelectedPropertyChangedEventArgs);
+            }
+        }
+        private bool _isSelected;
+        private PropertyChangedEventArgs _isSelectedPropertyChangedEventArgs = new PropertyChangedEventArgs(nameof(IsSelected));
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool IsPlaceable
+        {
+            get { return _isPlaceable; }
+            set
+            {
+                _isPlaceable = value;
+                PropertyChanged?.Invoke(this, _isPlaceablePropertyChangedEventArgs);
+            }
+        }
+        private bool _isPlaceable;
+        private PropertyChangedEventArgs _isPlaceablePropertyChangedEventArgs = new PropertyChangedEventArgs(nameof(IsPlaceable));
+
+        /// <summary>
         /// <see cref="INotifyPropertyChanged.PropertyChanged"/>.
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
