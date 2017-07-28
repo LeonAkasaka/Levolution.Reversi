@@ -59,5 +59,4 @@ namespace Levolution.Reversi.Components
             _cellAnimator.Play(cellState);
         }
     }
-
 }
