@@ -137,7 +137,13 @@ namespace Levolution.Reversi
         public bool TryPlace(CellPosition pos, Player player)
         {
             var r = IsPlaceable(pos, player);
-            if (r) { Place(pos, player); }
+            if (r)
+            {
+                foreach(var pt in Place(pos, player))
+                {
+                    GetCell(pt).State = player.ToCellState();
+                }
+            }
             return r;
         }
         
@@ -148,6 +154,11 @@ namespace Levolution.Reversi
         /// <param name="player"></param>
         /// <returns></returns>
         public IEnumerable<CellPosition> Place(CellPosition pos, Player player)
+        {
+            return PlaceInternal(pos, player).ToArray();
+        }
+
+        private IEnumerable<CellPosition> PlaceInternal(CellPosition pos, Player player)
         {
             var cellPositions = GetReversibleCellPositions(pos, player);
 
@@ -160,7 +171,7 @@ namespace Levolution.Reversi
                 yield return pos;
             }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
