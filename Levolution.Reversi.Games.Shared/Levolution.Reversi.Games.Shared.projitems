@@ -8,8 +8,4 @@
   <PropertyGroup Label="Configuration">
     <Import_RootNamespace>Levolution.Reversi.Games</Import_RootNamespace>
   </PropertyGroup>
-  <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)ITableCommands.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)TableCommands.cs" />
-  </ItemGroup>
 </Project>

@@ -9,7 +9,9 @@
     <Import_RootNamespace>Levolution.Reversi</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)ITableCommands.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Table.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TableCell.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TableCommands.cs" />
   </ItemGroup>
 </Project>

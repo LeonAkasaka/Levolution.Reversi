@@ -1,6 +1,6 @@
 ﻿using Levolution.Reversi.Records;
 
-namespace Levolution.Reversi.Games
+namespace Levolution.Reversi
 {
     public interface ITableCommands
     {
@@ -14,6 +14,6 @@ namespace Levolution.Reversi.Games
 
         void Select(CellPosition pt);
 
-        void Place(CellPosition pt);
+        void Place();
     }
 }
