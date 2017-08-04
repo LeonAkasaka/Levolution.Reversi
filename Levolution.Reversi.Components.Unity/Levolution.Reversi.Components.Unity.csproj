@@ -1,63 +1,15 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D1743878-1A61-4A24-A2B1-991C95A5CAA3}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Levolution.Reversi.Components</RootNamespace>
-    <AssemblyName>Levolution.Reversi.Components.Unity</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <TargetFramework>net46</TargetFramework>
+    <PostBuildEvent>copy Levolution.Reversi.Components.Unity.dll ..\..\..\..\Levolution.Reversi.Games.Unity\Assets\Levolution.Reversi.Components.Unity.dll</PostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <ProjectReference Include="..\Levolution.Reversi.Records.Unity\Levolution.Reversi.Records.Unity.csproj" />
+    <ProjectReference Include="..\Levolution.Reversi.Unity\Levolution.Reversi.Unity.csproj" />
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="UnityEngine">
       <HintPath>..\Levolution.Reversi.Games.Unity\Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="TableCellView.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TableCommandBehaviour.cs" />
-    <Compile Include="TableView.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Levolution.Reversi.Records.Unity\Levolution.Reversi.Records.Unity.csproj">
-      <Project>{23def601-1e71-4ef6-a5e0-24e9b078634c}</Project>
-      <Name>Levolution.Reversi.Records.Unity</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Levolution.Reversi.Unity\Levolution.Reversi.Unity.csproj">
-      <Project>{78e1b33f-7036-4270-9a57-3e0c300fdff6}</Project>
-      <Name>Levolution.Reversi.Unity</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>copy Levolution.Reversi.Components.Unity.dll ..\..\..\Levolution.Reversi.Games.Unity\Assets\Levolution.Reversi.Components.Unity.dll</PostBuildEvent>
-  </PropertyGroup>
 </Project>
