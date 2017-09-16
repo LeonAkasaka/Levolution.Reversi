@@ -7,7 +7,4 @@
     <ProjectReference Include="..\Levolution.Reversi.Records\Levolution.Reversi.Records.csproj" />
     <ProjectReference Include="..\Levolution.Reversi\Levolution.Reversi.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
 </Project>
