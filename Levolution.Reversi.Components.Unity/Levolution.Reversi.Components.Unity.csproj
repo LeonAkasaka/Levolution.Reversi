@@ -1,11 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net46</TargetFramework>
-    <PostBuildEvent>copy Levolution.Reversi.Components.Unity.dll ..\..\..\..\Levolution.Reversi.Games.Unity\Assets\Levolution.Reversi.Components.Unity.dll</PostBuildEvent>
+    <PostBuildEvent>copy Levolution.Reversi.dll ..\..\..\..\Levolution.Reversi.Games.Unity\Assets\Levolution.Reversi.dll
+copy Levolution.Reversi.Records.dll ..\..\..\..\Levolution.Reversi.Games.Unity\Assets\Levolution.Reversi.Records.dll
+copy Levolution.Reversi.Components.Unity.dll ..\..\..\..\Levolution.Reversi.Games.Unity\Assets\Levolution.Reversi.Components.Unity.dll</PostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Levolution.Reversi.Records.Unity\Levolution.Reversi.Records.Unity.csproj" />
-    <ProjectReference Include="..\Levolution.Reversi.Unity\Levolution.Reversi.Unity.csproj" />
+    <ProjectReference Include="..\Levolution.Reversi.Records\Levolution.Reversi.Records.csproj" />
+    <ProjectReference Include="..\Levolution.Reversi\Levolution.Reversi.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
