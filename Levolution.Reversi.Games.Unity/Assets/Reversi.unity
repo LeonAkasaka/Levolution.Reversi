@@ -353,7 +353,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cellViewPrefab: {fileID: 114924108420841464, guid: 77a661154ce24994e8dddb6117247e87,
     type: 3}
-  _records: c4
+  _records: 
 --- !u!114 &1536056742
 MonoBehaviour:
   m_ObjectHideFlags: 0
