@@ -25,10 +25,12 @@ namespace Levolution.Reversi.Components
         public IEnumerable<TableCellView> CellViews => _cellViews;
         private List<TableCellView> _cellViews = new List<TableCellView>();
 
-        private void Start()
+        public Player FirstPlayer { get; private set; }
+
+        private void Awake()
         {
             var records = CellPosition.ParseList(_records);
-            Table.Reset(records);
+            FirstPlayer = Table.Reset(records);
 
             foreach (var cell in Table.Cells)
             {

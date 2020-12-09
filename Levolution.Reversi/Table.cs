@@ -1,4 +1,5 @@
 ﻿using Levolution.Reversi.Records;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -103,10 +104,13 @@ namespace Levolution.Reversi
         /// Reset by game's record (Algebraic notation).
         /// </summary>
         /// <param name="records">Algebraic notation of reversi.</param>
-        public void Reset(IEnumerable<CellPosition> records)
-        {
+        /// <returns>next player.</returns>
+        public Player Reset(IEnumerable<CellPosition> records)
+        {   
+            if (records == null) { throw new ArgumentNullException(nameof(records)); }
+
             Reset();
-            if (records == null) { return; }
+            if (!records.Any()) { return Player.Dark; }
 
             var player = Player.Dark;
             foreach(var record in records)
@@ -118,6 +122,7 @@ namespace Levolution.Reversi
                     if (!TryPlace(record, other)) { break; } // Game over.
                 }
             }
+            return player;
         }
 
         /// <summary>

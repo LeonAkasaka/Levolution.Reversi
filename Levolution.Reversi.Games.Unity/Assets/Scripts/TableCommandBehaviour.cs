@@ -11,7 +11,7 @@ namespace Levolution.Reversi.Components
 
         private void Start()
         {
-            TableCommands = new TableCommands(_table.Table);
+            TableCommands = new TableCommands(_table.Table, _table.FirstPlayer);
         }
 
         private void Update()
