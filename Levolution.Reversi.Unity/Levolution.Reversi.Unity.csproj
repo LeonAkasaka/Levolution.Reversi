@@ -1,15 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net46</TargetFramework>
-    <PostBuildEvent>copy Levolution.Reversi.Unity.dll ..\..\..\..\Levolution.Reversi.Games.Unity\Assets\Levolution.Reversi.Unity.dll</PostBuildEvent>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DefineConstants>TRACE;DEBUG;UNITY</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DefineConstants>TRACE;UNITY;RELEASE;NET46</DefineConstants>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PostBuildEvent>copy *.dll ..\..\..\..\Levolution.Reversi.Games.Unity\Assets\</PostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Levolution.Reversi.Records.Unity\Levolution.Reversi.Records.Unity.csproj" />
+    <ProjectReference Include="..\Levolution.Reversi.Records\Levolution.Reversi.Records.csproj" />
+    <ProjectReference Include="..\Levolution.Reversi\Levolution.Reversi.csproj" />
   </ItemGroup>
 </Project>
