@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Levolution.Reversi.Records.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Levolution.Reversi.UnitTest", "Levolution.Reversi.UnitTest\Levolution.Reversi.UnitTest.csproj", "{EF2A5814-C6D9-47C2-8D60-8BBA279BCAA3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Levolution.Reversi.Games.AzureFunctions", "Levolution.Reversi.Games.AzureFunctions\Levolution.Reversi.Games.AzureFunctions.csproj", "{198ED68C-D181-4A3A-B321-822196107638}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{EF2A5814-C6D9-47C2-8D60-8BBA279BCAA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF2A5814-C6D9-47C2-8D60-8BBA279BCAA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF2A5814-C6D9-47C2-8D60-8BBA279BCAA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{198ED68C-D181-4A3A-B321-822196107638}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{198ED68C-D181-4A3A-B321-822196107638}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{198ED68C-D181-4A3A-B321-822196107638}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{198ED68C-D181-4A3A-B321-822196107638}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +68,7 @@ Global
 		{44335EAB-517F-4E04-8B6D-A3413A287024} = {4A334931-8A4D-4FF2-A3A0-F10253472F37}
 		{02260368-9428-4BFF-8E5B-B83E77EB50CB} = {8C3AFF0D-4D67-4F0E-B8AD-D2F3A06CD024}
 		{EF2A5814-C6D9-47C2-8D60-8BBA279BCAA3} = {EEF2058A-036A-49F1-9756-F866820C0C21}
+		{198ED68C-D181-4A3A-B321-822196107638} = {4A334931-8A4D-4FF2-A3A0-F10253472F37}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {68CCF2BC-D503-4376-ACD9-D3CADCD5083A}
