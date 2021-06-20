@@ -93,6 +93,33 @@ namespace Levolution.Reversi
         public TableCell GetCell(int row, int column) => _cells[row, column];
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cellPosition"></param>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        public bool TryGetCell(CellPosition cellPosition, out TableCell result) => TryGetCell(cellPosition.Row, cellPosition.Column, out result);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="row"></param>
+        /// <param name="column"></param>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        public bool TryGetCell(int row, int column, out TableCell result)
+        {
+            result = default;
+
+            if (row >= 0 && row < Rows && column >= 0 && column < Columns)
+            {
+                result = GetCell(row, column);
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
         /// Reset game.
         /// </summary>
         public void Reset()
@@ -213,7 +240,7 @@ namespace Levolution.Reversi
             var other = player.GetOtherPlayer().ToCellState();
 
             var ncp = new CellPosition(pos.Row + dr, pos.Column + dc);
-            if ((GetCell(ncp.Row, ncp.Column)?.State ?? CellState.None) != other)
+            if (TryGetCell(ncp.Row, ncp.Column, out var nCell) && nCell.State != other)
             {
                 return new CellPosition[0];
             }
@@ -225,9 +252,9 @@ namespace Levolution.Reversi
                 icp = new CellPosition(icp.Row + dr, icp.Column + dc)
             )
             {
-                var cell = GetCell(icp.Row, icp.Column)?.State ?? CellState.None;
-                if (cell == other) { list.Add(icp); }
-                else if (cell == own) { return list; }
+                var cell = GetCell(icp.Row, icp.Column);
+                if (cell.State == other) { list.Add(icp); }
+                else if (cell.State == own) { return list; }
                 else { break; }
             }
             return new CellPosition[0];
@@ -286,7 +313,7 @@ namespace Levolution.Reversi
             var other = player.GetOtherPlayer().ToCellState();
 
             var nPos = new CellPosition(pos.Row + dr, pos.Column + dc);
-            if ((GetCell(nPos)?.State ?? CellState.None) != other) { return false; }
+            if (TryGetCell(nPos, out var cell) && cell.State != other) { return false; }
 
             for (
                 var iPos = new CellPosition(nPos.Row + dr, nPos.Column + dc);
