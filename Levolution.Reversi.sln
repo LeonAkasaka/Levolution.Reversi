@@ -5,13 +5,13 @@ VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{8C3AFF0D-4D67-4F0E-B8AD-D2F3A06CD024}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logic", "Logic", "{EEF2058A-036A-49F1-9756-F866820C0C21}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{EEF2058A-036A-49F1-9756-F866820C0C21}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Levolution.Reversi.Records", "Levolution.Reversi.Records\Levolution.Reversi.Records.csproj", "{DEAA9167-39F7-49D4-9942-4A3526FEE138}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Levolution.Reversi", "Levolution.Reversi\Levolution.Reversi.csproj", "{80AC7394-BE6A-47BB-B28B-DEDCB441493C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Games", "Games", "{4A334931-8A4D-4FF2-A3A0-F10253472F37}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Apps", "Apps", "{4A334931-8A4D-4FF2-A3A0-F10253472F37}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Levolution.Reversi.Games.Console", "Levolution.Reversi.Games.Console\Levolution.Reversi.Games.Console.csproj", "{7C5465CD-F100-4844-B2E3-02F57949CDE6}"
 EndProject
@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Levolution.Reversi.Unity", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Levolution.Reversi.Records.UnitTest", "Levolution.Reversi.Records.UnitTest\Levolution.Reversi.Records.UnitTest.csproj", "{02260368-9428-4BFF-8E5B-B83E77EB50CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Levolution.Reversi.UnitTest", "Levolution.Reversi.UnitTest\Levolution.Reversi.UnitTest.csproj", "{EF2A5814-C6D9-47C2-8D60-8BBA279BCAA3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Levolution.Reversi.UnitTest", "Levolution.Reversi.UnitTest\Levolution.Reversi.UnitTest.csproj", "{EF2A5814-C6D9-47C2-8D60-8BBA279BCAA3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
