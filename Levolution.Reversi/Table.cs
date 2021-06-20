@@ -197,14 +197,14 @@ namespace Levolution.Reversi
             if (state != CellState.None) { return new CellPosition[0]; }
 
             var list = new List<CellPosition>();
-            list.AddRange(GetReversibleCellPositionsByDirection(pos, -1, -1, player)); //左上
-            list.AddRange(GetReversibleCellPositionsByDirection(pos, -1, 0, player)); //上
-            list.AddRange(GetReversibleCellPositionsByDirection(pos, -1, 1, player)); //右上
-            list.AddRange(GetReversibleCellPositionsByDirection(pos, 0, -1, player)); //左
-            list.AddRange(GetReversibleCellPositionsByDirection(pos, 0, 1, player)); //右
-            list.AddRange(GetReversibleCellPositionsByDirection(pos, 1, -1, player)); //左下
-            list.AddRange(GetReversibleCellPositionsByDirection(pos, 1, 0, player)); //下
-            list.AddRange(GetReversibleCellPositionsByDirection(pos, 1, 1, player)); //右;
+            list.AddRange(GetReversibleCellPositionsByDirection(pos, -1, -1, player)); // loft, top
+            list.AddRange(GetReversibleCellPositionsByDirection(pos, -1, 0, player)); // top
+            list.AddRange(GetReversibleCellPositionsByDirection(pos, -1, 1, player)); // right, top
+            list.AddRange(GetReversibleCellPositionsByDirection(pos, 0, -1, player)); // left
+            list.AddRange(GetReversibleCellPositionsByDirection(pos, 0, 1, player)); // right
+            list.AddRange(GetReversibleCellPositionsByDirection(pos, 1, -1, player)); // left, bottom
+            list.AddRange(GetReversibleCellPositionsByDirection(pos, 1, 0, player)); // bottom
+            list.AddRange(GetReversibleCellPositionsByDirection(pos, 1, 1, player)); // right
             return list;
         }
         private IEnumerable<CellPosition> GetReversibleCellPositionsByDirection(CellPosition pos, int dr, int dc, Player player)
@@ -262,14 +262,14 @@ namespace Levolution.Reversi
             if (state != CellState.None) { return false; }
 
             return
-                IsPlaceableByDirection(pos, -1, -1, player) || //左上
-                IsPlaceableByDirection(pos, -1, 0, player) || //上
-                IsPlaceableByDirection(pos, -1, 1, player) || //右上
-                IsPlaceableByDirection(pos, 0, -1, player) || //左
-                IsPlaceableByDirection(pos, 0, 1, player) || //右
-                IsPlaceableByDirection(pos, 1, -1, player) || //左下
-                IsPlaceableByDirection(pos, 1, 0, player) || //下
-                IsPlaceableByDirection(pos, 1, 1, player); //右;
+                IsPlaceableByDirection(pos, -1, -1, player) || // left, top
+                IsPlaceableByDirection(pos, -1, 0, player) || // top
+                IsPlaceableByDirection(pos, -1, 1, player) || // right, top
+                IsPlaceableByDirection(pos, 0, -1, player) || // left
+                IsPlaceableByDirection(pos, 0, 1, player) || // right
+                IsPlaceableByDirection(pos, 1, -1, player) || // left, bottom
+                IsPlaceableByDirection(pos, 1, 0, player) || // bottom
+                IsPlaceableByDirection(pos, 1, 1, player); // right;
         }
 
         /// <summary>
