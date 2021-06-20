@@ -24,11 +24,23 @@ namespace Levolution.Reversi
         /// <summary>
         /// Cell states.
         /// </summary>
-        public IEnumerable<TableCell> Cells => _cells.Values;
-        private Dictionary<CellPosition, TableCell> _cells = new Dictionary<CellPosition, TableCell>();
+        public IEnumerable<TableCell> Cells
+        {
+            get
+            {
+                for (var r = 0; r < Rows; r++)
+                {
+                    for (var c = 0; c < Columns; c++)
+                    {
+                        yield return _cells[r, c];
+                    }
+                }
+            }
+        }
+        private readonly TableCell[,] _cells = new TableCell[Rows, Columns];
 
         /// <summary>
-        /// 
+        /// Gets selected cell.
         /// </summary>
         public CellPosition SelectedCell
         {
@@ -58,7 +70,7 @@ namespace Levolution.Reversi
                 for (var c = 0; c < Columns; c++)
                 {
                     var pos = new CellPosition(r, c);
-                    _cells.Add(pos,  new TableCell(pos));
+                    _cells[r, c] = new TableCell(pos);
                 }
             }
 
@@ -68,24 +80,17 @@ namespace Levolution.Reversi
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="pos"></param>
+        /// <param name="cellPosition"></param>
         /// <returns></returns>
-        public TableCell GetCell(CellPosition pos)
-        {
-            if (_cells.TryGetValue(pos, out TableCell cell))
-            {
-                return cell;
-            }
-            return null;
-        }
+        public TableCell GetCell(CellPosition cellPosition) => _cells[cellPosition.Row, cellPosition.Column];
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="r"></param>
-        /// <param name="c"></param>
+        /// <param name="row"></param>
+        /// <param name="column"></param>
         /// <returns></returns>
-        public TableCell GetCell(int r, int c) => GetCell(new CellPosition(r, c));
+        public TableCell GetCell(int row, int column) => _cells[row, column];
 
         /// <summary>
         /// Reset game.
