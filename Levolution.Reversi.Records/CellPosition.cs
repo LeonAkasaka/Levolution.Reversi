@@ -65,10 +65,7 @@ namespace Levolution.Reversi.Records
             if (s == null) { throw new ArgumentNullException(nameof(s)); }
             if (s.Length != 2) { throw new ArgumentException($"\"{s}\" is not position string.", nameof(s)); }
 
-            var ary = s.ToCharArray();
-            var cc = ary[0];
-            var rc = ary[1];
-            return ToCellPosition(cc, rc);
+            return ToCellPosition(s[0], s[1]);
         }
 
         /// <summary>
@@ -94,10 +91,9 @@ namespace Levolution.Reversi.Records
             if (s == null) { throw new ArgumentNullException(nameof(s)); }
             if ((s.Length % 2) != 0) { throw new ArgumentException($"\"{s}\" is not position string.", nameof(s)); }
 
-            var ary = s.ToCharArray();
-            for (var i = 0; i < ary.Length; i += 2)
+            for (var i = 0; i < s.Length; i += 2)
             {
-                yield return ToCellPosition(ary[i], ary[i + 1]);
+                yield return ToCellPosition(s[i], s[i + 1]);
             }
         }
     }
