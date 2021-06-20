@@ -74,7 +74,7 @@ namespace Levolution.Reversi
                 }
             }
 
-            SelectedCell= new CellPosition();
+            SelectedCell = default;
         }
 
         /// <summary>
