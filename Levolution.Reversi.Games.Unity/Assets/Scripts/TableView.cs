@@ -1,7 +1,6 @@
 ﻿using Levolution.Reversi.Records;
-using UnityEngine;
-using System.Linq;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Levolution.Reversi.Components
 {
@@ -23,7 +22,7 @@ namespace Levolution.Reversi.Components
         public Table Table { get; } = new Table();
 
         public IEnumerable<TableCellView> CellViews => _cellViews;
-        private List<TableCellView> _cellViews = new List<TableCellView>();
+        private readonly List<TableCellView> _cellViews = new List<TableCellView>();
 
         public Player FirstPlayer { get; private set; }
 
