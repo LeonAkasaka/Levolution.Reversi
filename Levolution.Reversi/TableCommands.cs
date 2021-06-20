@@ -1,6 +1,5 @@
 ﻿using Levolution.Reversi.Records;
 using System.Linq;
-using System;
 
 namespace Levolution.Reversi
 {
@@ -40,7 +39,7 @@ namespace Levolution.Reversi
 
         private void ResetPlaceableCells()
         {
-            foreach(var cell in Table.Cells)
+            foreach (var cell in Table.Cells)
             {
                 cell.IsPlaceable = false;
             }
