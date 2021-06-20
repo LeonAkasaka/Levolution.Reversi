@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{8C3AFF0D-4D67-4F0E-B8AD-D2F3A06CD024}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ViewModels", "ViewModels", "{EEF2058A-036A-49F1-9756-F866820C0C21}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logic", "Logic", "{EEF2058A-036A-49F1-9756-F866820C0C21}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Levolution.Reversi.Records", "Levolution.Reversi.Records\Levolution.Reversi.Records.csproj", "{DEAA9167-39F7-49D4-9942-4A3526FEE138}"
 EndProject
@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Levolution.Reversi.Games.Co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Levolution.Reversi.Unity", "Levolution.Reversi.Unity\Levolution.Reversi.Unity.csproj", "{44335EAB-517F-4E04-8B6D-A3413A287024}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Levolution.Reversi.Records.UnitTest", "Levolution.Reversi.Records.UnitTest\Levolution.Reversi.Records.UnitTest.csproj", "{02260368-9428-4BFF-8E5B-B83E77EB50CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Levolution.Reversi.Records.UnitTest", "Levolution.Reversi.Records.UnitTest\Levolution.Reversi.Records.UnitTest.csproj", "{02260368-9428-4BFF-8E5B-B83E77EB50CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
