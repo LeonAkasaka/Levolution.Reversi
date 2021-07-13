@@ -28,6 +28,7 @@ namespace Levolution.Reversi.Components
 
         private void Awake()
         {
+            _records = _records.ToLower().Trim();
             var records = CellPosition.ParseList(_records);
             FirstPlayer = Table.Reset(records);
 
