@@ -19,9 +19,9 @@ class Program
 
     private static StringBuilder ToString(Table table, StringBuilder builder)
     {
-        for (var c = 0; c < Table.Columns; c++)
+        for (var r = 0; r < Table.Rows; r++)
         {
-            for (var r = 0; r < Table.Rows; r++)
+            for (var c = 0; c < Table.Columns; c++)
             {
                 var cell = table.GetCell(r, c);
                 builder.Append(CellStateToChar(cell.State));
