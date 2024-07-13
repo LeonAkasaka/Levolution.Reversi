@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Levolution.Reversi.Records;
+using UnityEngine;
 
 namespace Levolution.Reversi.Components
 {
@@ -7,8 +8,6 @@ namespace Levolution.Reversi.Components
     /// </summary>
     public class TableCellView : MonoBehaviour
     {
-        private const float CellMargin = 1.1F;
-
         #region SerializeField
 
         [SerializeField]
@@ -47,12 +46,6 @@ namespace Levolution.Reversi.Components
         {
             var diskState = TableCell?.State ?? Records.CellState.None;
             _diskAnimator.Play(diskState.ToString()); // TODO: to Name hash
-
-            name = nameof(TableCellView) + $"({TableCell?.Position.ToString()})";
-
-            var x = TableCell?.Position.Column ?? 0;
-            var z = TableCell?.Position.Row ?? 0;
-            transform.localPosition = new Vector3(x * CellMargin, 0, -(z * CellMargin));
 
             var cellState = TableCell.IsSelected ? "Selected"
                 : TableCell.IsPlaceable ? "Placeable" : "Unselected";

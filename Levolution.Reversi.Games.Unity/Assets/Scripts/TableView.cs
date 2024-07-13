@@ -6,6 +6,8 @@ namespace Levolution.Reversi.Components
 {
     public class TableView : MonoBehaviour
     {
+        private const float CellMargin = 1.1F;
+
         #region SerializeField
 
         [SerializeField]
@@ -22,7 +24,7 @@ namespace Levolution.Reversi.Components
         public Table Table { get; } = new Table();
 
         public IEnumerable<TableCellView> CellViews => _cellViews;
-        private readonly List<TableCellView> _cellViews = new List<TableCellView>();
+        private readonly List<TableCellView> _cellViews = new();
 
         public Player FirstPlayer { get; private set; }
 
@@ -32,16 +34,31 @@ namespace Levolution.Reversi.Components
             var records = CellPosition.ParseList(_records);
             FirstPlayer = Table.Reset(records);
 
-            foreach (var cell in Table.Cells)
+            InitializeTableCells();
+        }
+
+        private void InitializeTableCells()
+        {
+            for (var r = 0; r < Table.Rows; r++)
             {
-                _cellViews.Add(CreateTableCellView(cell));
+                for (var c = 0; c < Table.Columns; c++)
+                {
+                    var cell = Table.GetCell(r, c);
+                    _cellViews.Add(CreateTableCellView(cell, new(r, c)));
+                }
             }
         }
 
-        private TableCellView CreateTableCellView(TableCell cell)
+        private TableCellView CreateTableCellView(TableCell cell, CellPosition cellPosition)
         {
             var cellView = Instantiate(_cellViewPrefab, transform, true);
             cellView.TableCell = cell;
+
+            cellView.name = nameof(TableCellView) + $"({cellPosition})";
+
+            var x = cellPosition.Column;
+            var z = cellPosition.Row;
+            cellView.transform.localPosition = new Vector3(x * CellMargin, 0, -(z * CellMargin));
 
             return cellView;
         }
