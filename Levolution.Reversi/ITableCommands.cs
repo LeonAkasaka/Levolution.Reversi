@@ -1,19 +1,18 @@
 ﻿using Levolution.Reversi.Records;
 
-namespace Levolution.Reversi
+namespace Levolution.Reversi;
+
+public interface ITableCommands
 {
-    public interface ITableCommands
-    {
-        void MoveUp();
+    void MoveUp();
 
-        void MoveDown();
+    void MoveDown();
 
-        void MoveLeft();
+    void MoveLeft();
 
-        void MoveRight();
+    void MoveRight();
 
-        void Select(CellPosition pt);
+    void Select(CellPosition pt);
 
-        void Place();
-    }
+    void Place();
 }

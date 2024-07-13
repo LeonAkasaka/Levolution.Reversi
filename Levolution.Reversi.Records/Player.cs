@@ -1,18 +1,17 @@
-﻿namespace Levolution.Reversi.Records
+﻿namespace Levolution.Reversi.Records;
+
+/// <summary>
+/// Player disc color.
+/// </summary>
+public enum Player
 {
     /// <summary>
-    /// Player disc color.
+    /// Dark side player.
     /// </summary>
-    public enum Player
-    {
-        /// <summary>
-        /// Dark side player.
-        /// </summary>
-        Dark = CellState.Dark,
+    Dark = CellState.Dark,
 
-        /// <summary>
-        /// Light side player.
-        /// </summary>
-        Light = CellState.Light
-    }
+    /// <summary>
+    /// Light side player.
+    /// </summary>
+    Light = CellState.Light
 }

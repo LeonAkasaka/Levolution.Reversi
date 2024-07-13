@@ -1,81 +1,83 @@
 ﻿using Levolution.Reversi.Records;
 using System.Linq;
 
-namespace Levolution.Reversi
+namespace Levolution.Reversi;
+
+/// <summary>
+/// 
+/// </summary>
+public class TableCommands : ITableCommands
 {
-    public class TableCommands : ITableCommands
+    /// <summary>
+    /// 
+    /// </summary>
+    public Table Table { get; }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public Player CurrentPlayer { get; private set; }
+
+    /// <summary>
+    ///
+    /// </summary>
+    /// <param name="table"></param>
+    /// <param name="firstPlayer"></param>
+    public TableCommands(Table table, Player firstPlayer = Player.Dark)
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        public Table Table { get; }
+        Table = table;
+        CurrentPlayer = firstPlayer;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public Player CurrentPlayer { get; private set; }
+        UpdatePlaceableCells(firstPlayer);
+    }
 
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name="table"></param>
-        /// <param name="firstPlayer"></param>
-        public TableCommands(Table table, Player firstPlayer = Player.Dark)
+    private void UpdatePlaceableCells(Player player)
+    {
+        ResetPlaceableCells();
+        foreach (var pt in Table.GetPlaceableCells(player))
         {
-            Table = table;
-            CurrentPlayer = firstPlayer;
-
-            UpdatePlaceableCells(firstPlayer);
+            Table.GetCell(pt).IsPlaceable = true;
         }
+    }
 
-        private void UpdatePlaceableCells(Player player)
+    private void ResetPlaceableCells()
+    {
+        foreach (var cell in Table.Cells)
         {
-            ResetPlaceableCells();
-            foreach (var pt in Table.GetPlaceableCells(player))
-            {
-                Table.GetCell(pt).IsPlaceable = true;
-            }
+            cell.IsPlaceable = false;
         }
+    }
 
-        private void ResetPlaceableCells()
+    public void MoveDown() => Move(1, 0);
+
+    public void MoveLeft() => Move(0, -1);
+
+    public void MoveRight() => Move(0, 1);
+
+    public void MoveUp() => Move(-1, 0);
+
+    private void Move(int row, int column)
+    {
+        var oldPt = Table.SelectedCell;
+        var newPt = new CellPosition(oldPt.Row + row, oldPt.Column + column);
+        if (newPt.Row >= 0 && newPt.Row < Table.Rows && newPt.Column >= 0 && newPt.Column < Table.Columns)
         {
-            foreach (var cell in Table.Cells)
-            {
-                cell.IsPlaceable = false;
-            }
+            Table.SelectedCell = newPt;
         }
+    }
 
-        public void MoveDown() => Move(1, 0);
-
-        public void MoveLeft() => Move(0, -1);
-
-        public void MoveRight() => Move(0, 1);
-
-        public void MoveUp() => Move(-1, 0);
-
-        private void Move(int row, int column)
+    public void Place()
+    {
+        if (Table.TryPlace(Table.SelectedCell, CurrentPlayer))
         {
-            var oldPt = Table.SelectedCell;
-            var newPt = new CellPosition(oldPt.Row + row, oldPt.Column + column);
-            if (newPt.Row >= 0 && newPt.Row < Table.Rows && newPt.Column >= 0 && newPt.Column < Table.Columns)
-            {
-                Table.SelectedCell = newPt;
-            }
+            var otherPlayer = CurrentPlayer.GetOtherPlayer();
+            CurrentPlayer = Table.GetPlaceableCells(otherPlayer).Any() ? otherPlayer : CurrentPlayer;
+            UpdatePlaceableCells(CurrentPlayer);
         }
+    }
 
-        public void Place()
-        {
-            if (Table.TryPlace(Table.SelectedCell, CurrentPlayer))
-            {
-                var otherPlayer = CurrentPlayer.GetOtherPlayer();
-                CurrentPlayer = Table.GetPlaceableCells(otherPlayer).Any() ? otherPlayer : CurrentPlayer;
-                UpdatePlaceableCells(CurrentPlayer);
-            }
-        }
-
-        public void Select(CellPosition pt)
-        {
-            Table.SelectedCell = pt;
-        }
+    public void Select(CellPosition pt)
+    {
+        Table.SelectedCell = pt;
     }
 }

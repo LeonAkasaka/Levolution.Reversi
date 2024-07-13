@@ -1,23 +1,22 @@
-﻿namespace Levolution.Reversi.Records
+﻿namespace Levolution.Reversi.Records;
+
+/// <summary>
+/// Cell state.
+/// </summary>
+public enum CellState
 {
     /// <summary>
-    /// Cell state.
+    /// None disc on the cell.
     /// </summary>
-    public enum CellState
-    {
-        /// <summary>
-        /// None disc on the cell.
-        /// </summary>
-        None,
+    None,
 
-        /// <summary>
-        /// Dark disc on the celll.
-        /// </summary>
-        Dark,
+    /// <summary>
+    /// Dark disc on the celll.
+    /// </summary>
+    Dark,
 
-        /// <summary>
-        /// Light disc on the cell.
-        /// </summary>
-        Light
-    }
+    /// <summary>
+    /// Light disc on the cell.
+    /// </summary>
+    Light
 }
