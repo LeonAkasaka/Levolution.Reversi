@@ -1,5 +1,4 @@
-﻿using Levolution.Reversi.Records;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Levolution.Reversi.Components
 {
