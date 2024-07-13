@@ -4,17 +4,19 @@ using System.ComponentModel;
 namespace Levolution.Reversi;
 
 /// <summary>
-/// Table cell.
+/// The cell of <see cref="Table"/>.
 /// </summary>
-public class TableCell : INotifyPropertyChanged
+/// <param name="position">This cell position.</param>
+/// <param name="state"></param>
+public class TableCell(CellState state = CellState.None) : INotifyPropertyChanged
 {
     /// <summary>
-    /// Position.
+    /// Gets and sets the cell position.
     /// </summary>
-    public CellPosition Position { get; }
+    //public CellPosition Position { get; } = position;
 
     /// <summary>
-    /// Cell state.
+    /// Gets and sets the cell states.
     /// </summary>
     public CellState State
     {
@@ -25,11 +27,11 @@ public class TableCell : INotifyPropertyChanged
             PropertyChanged?.Invoke(this, _statePropertyChangedEventArgs);
         }
     }
-    private CellState _state;
-    private PropertyChangedEventArgs _statePropertyChangedEventArgs = new PropertyChangedEventArgs(nameof(State));
+    private CellState _state = state;
+    private readonly PropertyChangedEventArgs _statePropertyChangedEventArgs = new(nameof(State));
 
     /// <summary>
-    /// 
+    /// Gets and sets if a cell can be selected,
     /// </summary>
     public bool IsSelected
     {
@@ -41,10 +43,10 @@ public class TableCell : INotifyPropertyChanged
         }
     }
     private bool _isSelected;
-    private PropertyChangedEventArgs _isSelectedPropertyChangedEventArgs = new PropertyChangedEventArgs(nameof(IsSelected));
+    private readonly PropertyChangedEventArgs _isSelectedPropertyChangedEventArgs = new(nameof(IsSelected));
 
     /// <summary>
-    /// 
+    /// Gets and sets if disks can be placed in the cell.
     /// </summary>
     public bool IsPlaceable
     {
@@ -56,20 +58,10 @@ public class TableCell : INotifyPropertyChanged
         }
     }
     private bool _isPlaceable;
-    private PropertyChangedEventArgs _isPlaceablePropertyChangedEventArgs = new PropertyChangedEventArgs(nameof(IsPlaceable));
+    private readonly PropertyChangedEventArgs _isPlaceablePropertyChangedEventArgs = new(nameof(IsPlaceable));
 
     /// <summary>
     /// <see cref="INotifyPropertyChanged.PropertyChanged"/>.
     /// </summary>
     public event PropertyChangedEventHandler PropertyChanged;
-
-    /// <summary>
-    /// Create new <see cref="TableCell"/> instance.
-    /// </summary>
-    /// <param name="position">This cell position.</param>
-    public TableCell(CellPosition position, CellState state = CellState.None)
-    {
-        Position = position;
-        _state = CellState.None;
-    }
 }

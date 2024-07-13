@@ -1,28 +1,29 @@
 ﻿using Levolution.Reversi.Records;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 
 namespace Levolution.Reversi;
 
 /// <summary>
-/// Reversi table.
+/// Represents a Reversi game table with an 8x8 grid of cells.
 /// </summary>
 public class Table : INotifyPropertyChanged
 {
     /// <summary>
-    /// Rows.
+    /// Number of rows on the table.
     /// </summary>
     public const int Rows = 8;
 
     /// <summary>
-    /// Columns.
+    /// Number of columns on the table.
     /// </summary>
     public const int Columns = 8;
 
     /// <summary>
-    /// Cell states.
+    /// Collection of all table cells.
     /// </summary>
     public IEnumerable<TableCell> Cells
     {
@@ -40,7 +41,7 @@ public class Table : INotifyPropertyChanged
     private readonly TableCell[,] _cells = new TableCell[Rows, Columns];
 
     /// <summary>
-    /// Gets selected cell.
+    /// Gets or sets the selected cell position.
     /// </summary>
     public CellPosition SelectedCell
     {
@@ -48,20 +49,17 @@ public class Table : INotifyPropertyChanged
         set
         {
             _selectedCell = value;
-            OnSelectedCellChanged();
-            if (PropertyChanged != null)
-            {
-                PropertyChanged.Invoke(this, _isSelectedCellPropertyChangedEventArgs);
-            }
+            OnSelectedCellChanged(value);
+            PropertyChanged?.Invoke(this, _isSelectedCellPropertyChangedEventArgs);
         }
     }
     private CellPosition _selectedCell;
-    private PropertyChangedEventArgs _isSelectedCellPropertyChangedEventArgs = new PropertyChangedEventArgs(nameof(SelectedCell));
+    private readonly PropertyChangedEventArgs _isSelectedCellPropertyChangedEventArgs = new(nameof(SelectedCell));
 
     public event PropertyChangedEventHandler PropertyChanged;
 
     /// <summary>
-    /// 
+    /// Constructs a new instance of the <see cref="Table"/> class.
     /// </summary>
     public Table()
     {
@@ -69,8 +67,7 @@ public class Table : INotifyPropertyChanged
         {
             for (var c = 0; c < Columns; c++)
             {
-                var pos = new CellPosition(r, c);
-                _cells[r, c] = new TableCell(pos);
+                _cells[r, c] = new TableCell();
             }
         }
 
@@ -78,35 +75,35 @@ public class Table : INotifyPropertyChanged
     }
 
     /// <summary>
-    /// 
+    /// Gets the cell at the specified position.
     /// </summary>
-    /// <param name="cellPosition"></param>
-    /// <returns></returns>
+    /// <param name="cellPosition">The position of the cell.</param>
+    /// <returns>The cell at the specified position.</returns>
     public TableCell GetCell(CellPosition cellPosition) => _cells[cellPosition.Row, cellPosition.Column];
 
     /// <summary>
-    /// 
+    /// Gets the cell at the specified row and column.
     /// </summary>
-    /// <param name="row"></param>
-    /// <param name="column"></param>
-    /// <returns></returns>
+    /// <param name="row">The row of the cell.</param>
+    /// <param name="column">The column of the cell.</param>
+    /// <returns>The cell at the specified row and column.</returns>
     public TableCell GetCell(int row, int column) => _cells[row, column];
 
     /// <summary>
-    /// 
+    /// Tries to get the cell at the specified position.
     /// </summary>
-    /// <param name="cellPosition"></param>
-    /// <param name="result"></param>
-    /// <returns></returns>
+    /// <param name="cellPosition">The position of the cell.</param>
+    /// <param name="result">The cell at the specified position, if found.</param>
+    /// <returns>True if the cell was found; otherwise, false.</returns>
     public bool TryGetCell(CellPosition cellPosition, out TableCell result) => TryGetCell(cellPosition.Row, cellPosition.Column, out result);
 
     /// <summary>
-    /// 
+    /// Tries to get the cell at the specified row and column.
     /// </summary>
-    /// <param name="row"></param>
-    /// <param name="column"></param>
-    /// <param name="result"></param>
-    /// <returns></returns>
+    /// <param name="row">The row of the cell.</param>
+    /// <param name="column">The column of the cell.</param>
+    /// <param name="result">The cell at the specified row and column, if found.</param>
+    /// <returns>True if the cell was found; otherwise, false.</returns>
     public bool TryGetCell(int row, int column, out TableCell result)
     {
         result = default;
@@ -120,7 +117,7 @@ public class Table : INotifyPropertyChanged
     }
 
     /// <summary>
-    /// Reset game.
+    /// Resets the game to the initial state.
     /// </summary>
     public void Reset()
     {
@@ -133,7 +130,7 @@ public class Table : INotifyPropertyChanged
     }
 
     /// <summary>
-    /// Reset by game's record (Algebraic notation).
+    /// Resets the game based on the given records.
     /// </summary>
     /// <param name="records">Algebraic notation of reversi.</param>
     /// <returns>next player.</returns>
@@ -158,7 +155,7 @@ public class Table : INotifyPropertyChanged
     }
 
     /// <summary>
-    /// All table cells initialize as  <see cref="CellState.None"/>.
+    /// Initializes all table cells to <see cref="CellState.None"/>.
     /// </summary>
     public void Clear()
     {
@@ -166,11 +163,11 @@ public class Table : INotifyPropertyChanged
     }
 
     /// <summary>
-    /// 
+    /// Attempts to place a piece for the specified player at the specified position.
     /// </summary>
-    /// <param name="pos"></param>
-    /// <param name="player"></param>
-    /// <returns></returns>
+    /// <param name="pos">The position to place the piece.</param>
+    /// <param name="player">The player making the move.</param>
+    /// <returns>True if the piece was placed successfully; otherwise, false.</returns>
     public bool TryPlace(CellPosition pos, Player player)
     {
         var r = IsPlaceable(pos, player);
@@ -185,15 +182,24 @@ public class Table : INotifyPropertyChanged
     }
 
     /// <summary>
-    /// 
+    /// Places a piece for the specified player at the specified position.
     /// </summary>
-    /// <param name="pos"></param>
-    /// <param name="player"></param>
-    /// <returns></returns>
+    /// <param name="pos">The position to place the piece.</param>
+    /// <param name="player">The player making the move.</param>
+    /// <returns>An enumerable of the positions where pieces were placed or flipped.</returns>
     public IEnumerable<CellPosition> Place(CellPosition pos, Player player)
     {
         return PlaceInternal(pos, player).ToArray();
     }
+
+    /// <summary>
+    /// Places a piece for the specified player at the specified row and column.
+    /// </summary>
+    /// <param name="row">The row index.</param>
+    /// <param name="column">The column index.</param>
+    /// <param name="player">The player making the move.</param>
+    /// <returns>An enumerable of the positions where pieces were placed or flipped.</returns>
+    public IEnumerable<CellPosition> Place(int row, int column, Player player) => Place(new(row, column), player);
 
     private IEnumerable<CellPosition> PlaceInternal(CellPosition pos, Player player)
     {
@@ -209,32 +215,26 @@ public class Table : INotifyPropertyChanged
         }
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="row"></param>
-    /// <param name="column"></param>
-    /// <param name="player"></param>
-    /// <returns></returns>
-    public IEnumerable<CellPosition> Place(int row, int column, Player player) => Place(new CellPosition(row, column), player);
-
     private IEnumerable<CellPosition> GetReversibleCellPositions(CellPosition pos, Player player)
     {
         var state = GetCell(pos).State;
-        if (state != CellState.None) { return new CellPosition[0]; }
+        if (state != CellState.None) { return []; }
 
-        var list = new List<CellPosition>();
-        list.AddRange(GetReversibleCellPositionsByDirection(pos, -1, -1, player)); // loft, top
-        list.AddRange(GetReversibleCellPositionsByDirection(pos, -1, 0, player)); // top
-        list.AddRange(GetReversibleCellPositionsByDirection(pos, -1, 1, player)); // right, top
-        list.AddRange(GetReversibleCellPositionsByDirection(pos, 0, -1, player)); // left
-        list.AddRange(GetReversibleCellPositionsByDirection(pos, 0, 1, player)); // right
-        list.AddRange(GetReversibleCellPositionsByDirection(pos, 1, -1, player)); // left, bottom
-        list.AddRange(GetReversibleCellPositionsByDirection(pos, 1, 0, player)); // bottom
-        list.AddRange(GetReversibleCellPositionsByDirection(pos, 1, 1, player)); // right
-        return list;
+        Span<CellPosition> cells = stackalloc CellPosition[Rows * Columns];
+
+        var offset = 0;
+        offset = GetReversibleCellPositionsByDirection(pos, -1, -1, player, offset, cells); // left, top
+        offset = GetReversibleCellPositionsByDirection(pos, -1, 0, player, offset, cells); // top
+        offset = GetReversibleCellPositionsByDirection(pos, -1, 1, player, offset, cells); // right, top
+        offset = GetReversibleCellPositionsByDirection(pos, 0, -1, player, offset, cells); // left
+        offset = GetReversibleCellPositionsByDirection(pos, 0, 1, player, offset, cells); // right
+        offset = GetReversibleCellPositionsByDirection(pos, 1, -1, player, offset, cells); // left, bottom
+        offset = GetReversibleCellPositionsByDirection(pos, 1, 0, player, offset, cells); // bottom
+        offset = GetReversibleCellPositionsByDirection(pos, 1, 1, player, offset, cells); // right, bottom
+        return cells[0..offset].ToArray();
     }
-    private IEnumerable<CellPosition> GetReversibleCellPositionsByDirection(CellPosition pos, int dr, int dc, Player player)
+
+    private int GetReversibleCellPositionsByDirection(CellPosition pos, int dr, int dc, Player player, int offset, Span<CellPosition> result)
     {
         var own = player.ToCellState();
         var other = player.GetOtherPlayer().ToCellState();
@@ -242,10 +242,12 @@ public class Table : INotifyPropertyChanged
         var ncp = new CellPosition(pos.Row + dr, pos.Column + dc);
         if (!TryGetCell(ncp.Row, ncp.Column, out var nCell) || nCell.State != other)
         {
-            return new CellPosition[0];
+            return offset;
         }
 
-        var list = new List<CellPosition>() { ncp };
+        result[offset] = ncp;
+        int count = 1;
+
         for (var icp = new CellPosition(ncp.Row + dr, ncp.Column + dc);
             icp.Row >= 0 && icp.Column >= 0 &&
             icp.Row < Rows && icp.Column < Columns;
@@ -253,18 +255,18 @@ public class Table : INotifyPropertyChanged
         )
         {
             var cell = GetCell(icp.Row, icp.Column);
-            if (cell.State == other) { list.Add(icp); }
-            else if (cell.State == own) { return list; }
+            if (cell.State == other) { result[offset + count] = icp; count++; }
+            else if (cell.State == own) { return offset + count; }
             else { break; }
         }
-        return new CellPosition[0];
+        return offset;
     }
 
     /// <summary>
-    /// 
+    /// Get all placeable cells for a given player.
     /// </summary>
-    /// <param name="player"></param>
-    /// <returns></returns>
+    /// <param name="player">The player to check for placeable cells.</param>
+    /// <returns>An enumerable of cell positions that are placeable.</returns>
     public IEnumerable<CellPosition> GetPlaceableCells(Player player)
     {
         for (var r = 0; r < Rows; r++)
@@ -277,11 +279,11 @@ public class Table : INotifyPropertyChanged
     }
 
     /// <summary>
-    /// 
+    /// Determines if a given position is placeable for a specific player.
     /// </summary>
-    /// <param name="pos"></param>
-    /// <param name="player"></param>
-    /// <returns></returns>
+    /// <param name="pos">The position to check.</param>
+    /// <param name="player">The player to check for.</param>
+    /// <returns>True if the position is placeable; otherwise, false.</returns>
     public bool IsPlaceable(CellPosition pos, Player player)
     {
 
@@ -300,13 +302,13 @@ public class Table : INotifyPropertyChanged
     }
 
     /// <summary>
-    /// 
+    /// Determines if a given row and column are placeable for a specific player.
     /// </summary>
-    /// <param name="row"></param>
-    /// <param name="column"></param>
-    /// <param name="player"></param>
-    /// <returns></returns>
-    public bool IsPlaceable(int row, int column, Player player) => IsPlaceable(new CellPosition(row, column), player);
+    /// <param name="row">The row to check.</param>
+    /// <param name="column">The column to check.</param>
+    /// <param name="player">The player to check for.</param>
+    /// <returns>True if the position is placeable; otherwise, false.</returns>
+    public bool IsPlaceable(int row, int column, Player player) => IsPlaceable(new(row, column), player);
 
     private bool IsPlaceableByDirection(CellPosition pos, int dr, int dc, Player player)
     {
@@ -328,15 +330,14 @@ public class Table : INotifyPropertyChanged
         return false;
     }
 
-    private void OnSelectedCellChanged()
+    private void OnSelectedCellChanged(CellPosition cellPosition)
     {
-        var oldSelectedCell = Cells.FirstOrDefault(x => x.IsSelected);
-        if (oldSelectedCell != null)
+        foreach (var cell in Cells)
         {
-            oldSelectedCell.IsSelected = false;
+            cell.IsSelected = false;
         }
 
-        var newSelectedCell = Cells.First(x => x.Position == SelectedCell);
+        var newSelectedCell = GetCell(cellPosition);
         newSelectedCell.IsSelected = true;
     }
 }

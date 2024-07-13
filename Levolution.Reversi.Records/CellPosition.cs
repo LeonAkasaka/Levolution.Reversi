@@ -8,7 +8,7 @@ namespace Levolution.Reversi.Records;
 /// </summary>
 /// <param name="row">Row position number.</param>
 /// <param name="column">Column position number.</param>
-public struct CellPosition(int row, int column)
+public readonly struct CellPosition(int row, int column)
 {
     /// <summary>
     /// Row number.

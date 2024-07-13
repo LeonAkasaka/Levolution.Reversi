@@ -31,15 +31,11 @@ class Program
         return builder;
     }
 
-    private static char CellStateToChar(CellState state)
+    private static char CellStateToChar(CellState state) => state switch
     {
-        switch (state)
-        {
-            case CellState.None: return '-';
-            case CellState.Dark: return 'D';
-            case CellState.Light: return 'L';
-        }
-
-        return default(char);
-    }
+        CellState.None => '-',
+        CellState.Dark => 'D',
+        CellState.Light => 'L',
+        _ => default,
+    };
 }

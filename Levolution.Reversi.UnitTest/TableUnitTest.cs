@@ -11,18 +11,10 @@ public class TableUnitTest
     {
         var table = new Table();
         Assert.Equal(Table.Rows * Table.Columns, table.Cells.Count());
-        Assert.Equal(default(CellPosition), table.SelectedCell);
+        Assert.Equal(default, table.SelectedCell);
 
-        var allPositions = table.Cells.Select(x => x.Position).ToArray();
-        for (var r = 0; r < Table.Rows; r++)
-        {
-            for (var c = 0; c < Table.Columns; c++)
-            {
-                var cp = new CellPosition(r, c);
-                Assert.Contains(cp, table.Cells.Select(x => x.Position));
-            }
-        }
-
+        var expectedCellCount = 8 * 8;
+        Assert.Equal(expectedCellCount, table.Cells.Count());
         Assert.All(table.Cells, x => Assert.Equal(CellState.None, x.State));
     }
 
