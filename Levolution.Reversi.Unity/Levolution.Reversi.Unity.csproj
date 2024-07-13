@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <PostBuildEvent>copy *.dll ..\..\..\..\Levolution.Reversi.Games.Unity\Assets\</PostBuildEvent>
+    <PostBuildEvent Condition="'$(GITHUB_ACTIONS)' == ''" >copy *.dll ..\..\..\..\Levolution.Reversi.Games.Unity\Assets\</PostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Levolution.Reversi.Records\Levolution.Reversi.Records.csproj" />
