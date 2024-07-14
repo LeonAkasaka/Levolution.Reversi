@@ -22,6 +22,35 @@ public class Table : INotifyPropertyChanged
     public const int Columns = 8;
 
     /// <summary>
+    /// Gets or sets the reversi data.
+    /// </summary>
+    public Data Data
+    {
+        get
+        {
+            var data = new Data();
+            for (var r = 0; r < Rows; r++)
+            {
+                for (var c = 0; c < Columns; c++)
+                {
+                    data[r, c] = _cells[r, c].State;
+                }
+            }
+            return data;
+        }
+        set
+        {
+            for (var r = 0; r < Rows; r++)
+            {
+                for (var c = 0; c < Columns; c++)
+                {
+                    _cells[r, c].State = value[r, c];
+                }
+            }
+        }
+    }
+
+    /// <summary>
     /// Collection of all table cells.
     /// </summary>
     public IEnumerable<TableCell> Cells
