@@ -214,7 +214,7 @@ public class Table : INotifyPropertyChanged
         }
     }
 
-    private IEnumerable<CellPosition> GetReversibleCellPositions(CellPosition pos, Player player)
+    private CellPosition[] GetReversibleCellPositions(CellPosition pos, Player player)
     {
         var state = GetCell(pos).State;
         if (state != CellState.None) { return []; }
