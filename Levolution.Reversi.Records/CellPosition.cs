@@ -4,26 +4,26 @@ using System.Collections.Generic;
 namespace Levolution.Reversi.Records;
 
 /// <summary>
-/// Position on reversi table.
+/// Represents a position on a board grid using row and column indices.
 /// </summary>
-/// <param name="row">Row position number.</param>
-/// <param name="column">Column position number.</param>
+/// <param name="row">The row index of the cell position.</param>
+/// <param name="column">The column index of the cell position.</param>
 public readonly struct CellPosition(int row, int column)
 {
     /// <summary>
-    /// Row number.
+    /// Gets the row index of the cell position.
     /// </summary>
     public int Row { get; } = row;
 
     /// <summary>
-    /// Column number.
+    /// Gets the column index of the cell position.
     /// </summary>
     public int Column { get; } = column;
 
     /// <summary>
-    /// <see cref="CellPosition"/> to string that is formated at "a1" - "h8".
+    /// Converts the current CellPosition value to its string representation.
     /// </summary>
-    /// <returns>Formatted position string.</returns>
+    /// <returns>A string representation of the current CellPosition value, where the column is represented by a letter ('a' to 'h') and the row is represented by a number ('1' to '8').</returns>
     public override string ToString() => $"{(char)(Column + 'a')}{Row + 1}";
 
     public override bool Equals(object obj)
@@ -47,10 +47,12 @@ public readonly struct CellPosition(int row, int column)
     }
 
     /// <summary>
-    /// Parse from string that is formated at "a1" - "h8".
+    /// Parses a string representation of a cell position into a CellPosition value.
     /// </summary>
-    /// <param name="s">position string.</param>
-    /// <returns>parsed <see cref="CellPosition"/>.</returns>
+    /// <param name="s">The string representation of the cell position to parse. It should be two characters long.</param>
+    /// <returns>A CellPosition value corresponding to the specified string representation.</returns>
+    /// <exception cref="ArgumentNullException">Thrown if the input string is null.</exception>
+    /// <exception cref="ArgumentException">Thrown if the input string length is not equal to 2, indicating an invalid position string.</exception>
     public static CellPosition Parse(string s)
     {
         if (s == null) { throw new ArgumentNullException(nameof(s)); }
@@ -60,11 +62,12 @@ public readonly struct CellPosition(int row, int column)
     }
 
     /// <summary>
-    /// Parse cell position characters.
+    /// Converts a pair of characters representing a cell position into a CellPosition value.
     /// </summary>
-    /// <param name="cc"></param>
-    /// <param name="rc"></param>
-    /// <returns></returns>
+    /// <param name="cc">The character representing the column ('a' to 'h').</param>
+    /// <param name="rc">The character representing the row ('1' to '8').</param>
+    /// <returns>A CellPosition value corresponding to the specified column and row characters.</returns>
+    /// <exception cref="ArgumentException">Thrown if the column character is not between 'a' and 'h', or if the row character is not between '1' and '8'.</exception>
     private static CellPosition ToCellPosition(char cc, char rc)
     {
         if (!(cc >= 'a' && cc <= 'h')) { throw new ArgumentException($"\"{cc}\" is invalid value.", nameof(cc)); }
@@ -73,10 +76,12 @@ public readonly struct CellPosition(int row, int column)
     }
 
     /// <summary>
-    /// Postion string to <see cref="CellPosition"/>s.
+    /// Parses a string representation of cell positions into an enumerable collection of CellPosition values.
     /// </summary>
-    /// <param name="s"></param>
-    /// <returns></returns>
+    /// <param name="s">The string representation of cell positions to parse.</param>
+    /// <returns>An enumerable collection of CellPosition values parsed from the input string.</returns>
+    /// <exception cref="ArgumentNullException">Thrown if the input string is null.</exception>
+    /// <exception cref="ArgumentException">Thrown if the input string length is not even, indicating an invalid position string.</exception>
     public static IEnumerable<CellPosition> ParseList(string s)
     {
         if (s == null) { throw new ArgumentNullException(nameof(s)); }
