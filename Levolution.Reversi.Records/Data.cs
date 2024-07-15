@@ -177,6 +177,33 @@ public struct Data : IEquatable<Data>
     }
 
     /// <summary>
+    /// Get all placeable cells for a given player.
+    /// </summary>
+    /// <param name="player">The player to check for placeable cells.</param>
+    /// <param name="cells">A span to store the positions of the placeable cells.</param>
+    /// <returns>The number of cells where a piece can be placed by the specified player.</returns>
+    public readonly int GetPlaceableCells(Player player, Span<CellPosition> cells)
+    {
+        int i = 0;
+        for (var r = 0; r < Rows; r++)
+        {
+            for (var c = 0; c < Columns; c++)
+            {
+                if (IsPlaceable(r, c, player))
+                {
+                    if (i >= cells.Length)
+                    {
+                        throw new ArgumentException("The provided span is too small to contain all placeable cells.", nameof(cells));
+                    }
+                    cells[i] = new(r, c);
+                    i++;
+                }
+            }
+        }
+        return i;
+    }
+
+    /// <summary>
     /// Determines if a given row and column are placeable for a specific player.
     /// </summary>
     /// <param name="row">The row to check.</param>
