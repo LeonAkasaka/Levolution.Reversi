@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Levolution.Reversi.Records;
 
@@ -91,5 +92,53 @@ public readonly struct CellPosition(int row, int column)
         {
             yield return ToCellPosition(s[i], s[i + 1]);
         }
+    }
+
+    /// <summary>
+    /// Parses a string representation of cell positions into an enumerable collection of CellPosition values.
+    /// </summary>
+    /// <param name="s">The string representation of cell positions to parse.</param>
+    /// <param name="buffer">A span to store the parsed cell positions.</param>
+    /// <returns>An enumerable collection of CellPosition values parsed from the input string.</returns>
+    /// <exception cref="ArgumentNullException">Thrown if the input string is null.</exception>
+    /// <exception cref="ArgumentException">Thrown if the input string length is not even, indicating an invalid position string.</exception>
+    public static int ParseList(string s, Span<CellPosition> buffer)
+    {
+        if (s == null) { throw new ArgumentNullException(nameof(s)); }
+        if ((s.Length % 2) != 0) { throw new ArgumentException($"\"{s}\" is not position string.", nameof(s)); }
+
+        var count = 0;
+        for(var i = 0;  i < s.Length; i += 2)
+        {
+            buffer[count] = ToCellPosition(s[i], s[i + 1]);
+            count++;
+        }
+        return count;
+    }
+
+    /// <summary>
+    /// Converts cell positions to a single string representation.
+    /// <seealso cref="ParseList(string)"/>
+    /// </summary>
+    /// <param name="cells">The enumerable collection of cell positions to convert.</param>
+    /// <returns>A string that represents the concatenated string representations of the cell positions.</returns>
+    public static string ToString(IEnumerable<CellPosition> cells)
+    {
+        var builder = new StringBuilder();
+        foreach(var cell in cells) {  builder.Append(cell.ToString()); }
+        return builder.ToString();
+    }
+
+    /// <summary>
+    /// Converts cell positions to a single string representation.
+    /// <seealso cref="ParseList(string)"/>
+    /// </summary>
+    /// <param name="cells">The read-only span of cell positions to convert.</param>
+    /// <returns>A string that represents the concatenated string representations of the cell positions.</returns>
+    public static string ToString(ReadOnlySpan<CellPosition> cells)
+    {
+        var builder = new StringBuilder();
+        foreach (var cell in cells) { builder.Append(cell.ToString()); }
+        return builder.ToString();
     }
 }
