@@ -5,7 +5,7 @@ namespace Levolution.Reversi.Records;
 /// <summary>
 /// 
 /// </summary>
-public struct Data : IEquatable<Data>
+public struct Data(ulong dark = 0, ulong light = 0) : IEquatable<Data>
 {
     /// <summary>
     /// Number of rows on the table.
@@ -72,8 +72,8 @@ public struct Data : IEquatable<Data>
         return player;
     }
 
-    private ulong _dark;
-    private ulong _light;
+    private ulong _dark = dark;
+    private ulong _light = light;
 
     /// <summary>
     /// Gets the nember of dark cells.
