@@ -39,20 +39,23 @@ namespace Levolution.Reversi.Components
 
         private void InitializeTableCells()
         {
+            var index = 0;
             for (var r = 0; r < Table.Rows; r++)
             {
                 for (var c = 0; c < Table.Columns; c++)
                 {
                     var cell = Table.GetCell(r, c);
-                    _cellViews.Add(CreateTableCellView(cell, new(r, c)));
+                    var cellView = transform.GetChild(index).GetComponent<TableCellView>();
+                    cellView.TableCell = cell;
+                    _cellViews.Add(cellView);
+                    index++;
                 }
             }
         }
 
-        private TableCellView CreateTableCellView(TableCell cell, CellPosition cellPosition)
+        private TableCellView CreateTableCellView(CellPosition cellPosition)
         {
             var cellView = Instantiate(_cellViewPrefab, transform, true);
-            cellView.TableCell = cell;
 
             cellView.name = nameof(TableCellView) + $"({cellPosition})";
 
