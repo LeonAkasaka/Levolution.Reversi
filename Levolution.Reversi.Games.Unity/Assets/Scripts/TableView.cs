@@ -28,17 +28,31 @@ namespace Levolution.Reversi.Components
 
         public Player FirstPlayer { get; private set; }
 
+        private void OnValidate()
+        {
+            InitializeTable();
+        }
         private void Awake()
         {
-            _records = _records.ToLower().Trim();
-            var records = CellPosition.ParseList(_records);
-            FirstPlayer = Table.Reset(records);
+            InitializeTable();
+        }
+        private void InitializeTable()
+        {
+            try
+            {
+                _records = _records.ToLower().Trim();
+                var records = CellPosition.ParseList(_records);
+                FirstPlayer = Table.Reset(records);
+            }
+            catch { }
 
             InitializeTableCells();
         }
 
         private void InitializeTableCells()
         {
+            _cellViews.Clear();
+
             var index = 0;
             for (var r = 0; r < Table.Rows; r++)
             {
