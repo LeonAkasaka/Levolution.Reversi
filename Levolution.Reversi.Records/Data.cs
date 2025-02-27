@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 
 namespace Levolution.Reversi.Records;
 
@@ -20,24 +21,11 @@ public struct Data(ulong dark = 0, ulong light = 0) : IEquatable<Data>
     /// <summary>
     /// Gets the initial placed data.
     /// </summary>
-    public static Data InitialPlaced
+    public static Data InitialPlaced => new()
     {
-        get
-        {
-            var data = new Data
-            {
-                _dark = 34628173824,
-                _light = 68853694464
-            };
-
-            //data[3, 4] = CellState.Dark;
-            //data[4, 3] = CellState.Dark;
-            //data[3, 3] = CellState.Light;
-            //data[4, 4] = CellState.Light;
-
-            return data;
-        }
-    }
+        _dark = 34628173824,
+        _light = 68853694464
+    };
 
     /// <summary>
     /// Resets the game based on the given records.
@@ -172,7 +160,10 @@ public struct Data(ulong dark = 0, ulong light = 0) : IEquatable<Data>
             return false;
         }
 
-        cellState = this[row, column];
+        var index = column + (row * Columns);
+        cellState = (_dark >> index & 1) != 0 ? CellState.Dark
+            : (_light >> index & 1) != 0 ? CellState.Light
+            : CellState.None;
         return true;
     }
 
