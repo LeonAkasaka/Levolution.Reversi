@@ -125,7 +125,7 @@ public readonly struct CellPosition(int row, int column)
     public static string ToString(IEnumerable<CellPosition> cells)
     {
         var builder = new StringBuilder();
-        foreach(var cell in cells) {  builder.Append(cell.ToString()); }
+        foreach(var cell in cells) { builder.Append(cell.ToString()); }
         return builder.ToString();
     }
 

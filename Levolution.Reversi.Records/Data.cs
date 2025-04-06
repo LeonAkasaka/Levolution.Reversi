@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Reflection;
 
 namespace Levolution.Reversi.Records;
 
 /// <summary>
-/// 
+/// Represents the game data for a Reversi game, including the state of the board and methods for manipulating it.
 /// </summary>
 public struct Data(ulong dark = 0, ulong light = 0) : IEquatable<Data>
 {
@@ -36,7 +35,7 @@ public struct Data(ulong dark = 0, ulong light = 0) : IEquatable<Data>
     public static Player Play(ReadOnlySpan<CellPosition> records, out Data data) => Play(InitialPlaced, records, out data);
 
     /// <summary>
-    /// Resets the game based on the given records starting from a specified source state..
+    /// Resets the game based on the given records starting from a specified source state.
     /// </summary>
     /// <param name="source">The initial state of the game from which to start processing the records.</param>
     /// <param name="records">The sequence of cell positions representing the game moves.</param>
@@ -64,12 +63,12 @@ public struct Data(ulong dark = 0, ulong light = 0) : IEquatable<Data>
     private ulong _light = light;
 
     /// <summary>
-    /// Gets the nember of dark cells.
+    /// Gets the number of dark cells.
     /// </summary>
     public readonly int DarkCount => PopCount(_dark);
 
     /// <summary>
-    /// Gets the nember of light cells.
+    /// Gets the number of light cells.
     /// </summary>
     public readonly int LightCount => PopCount(_light);
 
@@ -203,7 +202,6 @@ public struct Data(ulong dark = 0, ulong light = 0) : IEquatable<Data>
     /// <returns>True if the position is placeable; otherwise, false.</returns>
     public readonly bool IsPlaceable(int row, int column, Player player) => IsPlaceable(new(row, column), player);
 
-
     /// <summary>
     /// Determines if a given position is placeable for a specific player.
     /// </summary>
@@ -242,7 +240,6 @@ public struct Data(ulong dark = 0, ulong light = 0) : IEquatable<Data>
         }
         return false;
     }
-
 
     /// <summary>
     /// Places a piece for the specified player at the specified row and column.
@@ -327,13 +324,39 @@ public struct Data(ulong dark = 0, ulong light = 0) : IEquatable<Data>
         return 0;
     }
 
+    /// <summary>
+    /// Determines whether the specified object is equal to the current object.
+    /// </summary>
+    /// <param name="obj">The object to compare with the current object.</param>
+    /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
     public readonly override bool Equals(object obj) => obj is Data other && Equals(other);
 
+    /// <summary>
+    /// Determines whether the specified Data is equal to the current Data.
+    /// </summary>
+    /// <param name="other">The Data to compare with the current Data.</param>
+    /// <returns>true if the specified Data is equal to the current Data; otherwise, false.</returns>
     public readonly bool Equals(Data other) => _dark == other._dark && _light == other._light;
 
+    /// <summary>
+    /// Serves as the default hash function.
+    /// </summary>
+    /// <returns>A hash code for the current object.</returns>
     public readonly override int GetHashCode() => HashCode.Combine(_dark, _light);
 
+    /// <summary>
+    /// Determines whether two specified instances of Data are equal.
+    /// </summary>
+    /// <param name="left">The first Data to compare.</param>
+    /// <param name="right">The second Data to compare.</param>
+    /// <returns>true if the two Data instances are equal; otherwise, false.</returns>
     public static bool operator ==(Data left, Data right) => left.Equals(right);
 
+    /// <summary>
+    /// Determines whether two specified instances of Data are not equal.
+    /// </summary>
+    /// <param name="left">The first Data to compare.</param>
+    /// <param name="right">The second Data to compare.</param>
+    /// <returns>true if the two Data instances are not equal; otherwise, false.</returns>
     public static bool operator !=(Data left, Data right) => !(left == right);
 }
