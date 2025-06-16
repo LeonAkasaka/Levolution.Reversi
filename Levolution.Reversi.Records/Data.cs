@@ -210,6 +210,11 @@ public struct Data(ulong dark = 0, ulong light = 0) : IEquatable<Data>
     /// <returns>True if the position is placeable; otherwise, false.</returns>
     public readonly bool IsPlaceable(CellPosition pos, Player player)
     {
+        // Return false if the position is out of range
+        if (pos.Row < 0 || pos.Row >= Rows || pos.Column < 0 || pos.Column >= Columns)
+        {
+            return false;
+        }
         if (this[pos] != CellState.None) { return false; }
 
         return
